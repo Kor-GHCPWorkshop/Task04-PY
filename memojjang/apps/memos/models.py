@@ -26,6 +26,17 @@ class Memo(models.Model):
         verbose_name="수정일시",
         auto_now=True
     )
+    reminder_date = models.DateTimeField(
+        verbose_name="리마인드 일시",
+        null=True,
+        blank=True,
+        help_text="메모를 리마인드 받을 날짜와 시간"
+    )
+    is_reminded = models.BooleanField(
+        verbose_name="리마인드 완료",
+        default=False,
+        help_text="리마인드가 완료되었는지 여부"
+    )
 
     class Meta:
         """메모 모델 메타 클래스"""

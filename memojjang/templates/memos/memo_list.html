@@ -13,14 +13,15 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ memo.title }}</h5>
                         <p class="card-text">{{ memo.content|truncatewords:30 }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">{{ memo.created_at|date:"Y년 m월 d일" }}</small>
-                        <div class="mt-2">
-                            <a href="{% url 'memo_detail' memo.pk %}" class="btn btn-sm btn-outline-primary">자세히</a>
-                            <a href="{% url 'memo_edit' memo.pk %}" class="btn btn-sm btn-outline-secondary">수정</a>
-                            <a href="{% url 'memo_delete' memo.pk %}" class="btn btn-sm btn-outline-danger">삭제</a>
-                        </div>
+                        {% if memo.reminder_date %}
+                            <p class="card-text">
+                                <small class="text-{% if memo.is_reminded %}success{% else %}warning{% endif %}">
+                                    리마인드 예정: {{ memo.reminder_date|date:"Y년 m월 d일 H:i" }}
+                                    {% if memo.is_reminded %}(완료){% endif %}
+                                </small>
+                            </p>
+                        {% endif %}
+                        <a href="{% url 'memo_detail' memo.pk %}" class="btn btn-sm btn-primary">자세히 보기</a>
                     </div>
                 </div>
             </div>

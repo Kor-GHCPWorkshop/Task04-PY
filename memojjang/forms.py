@@ -9,10 +9,16 @@ class MemoForm(forms.ModelForm):
     
     class Meta:
         model = Memo
-        fields = ["title", "content"]
+        fields = ["title", "content", "reminder_date"]
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             "content": forms.Textarea(attrs={"class": "form-control", "rows": 5}),
+            "reminder_date": forms.DateTimeInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "datetime-local"
+                }
+            ),
         }
 
 

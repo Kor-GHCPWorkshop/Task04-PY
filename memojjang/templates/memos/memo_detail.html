@@ -6,6 +6,13 @@
         <div class="card-header">
             <h2>{{ memo.title }}</h2>
             <small class="text-muted">작성일: {{ memo.created_at|date:"Y년 m월 d일" }}</small>
+            {% if memo.reminder_date %}
+                <br>
+                <small class="text-{% if memo.is_reminded %}success{% else %}warning{% endif %}">
+                    리마인드 예정: {{ memo.reminder_date|date:"Y년 m월 d일 H:i" }}
+                    {% if memo.is_reminded %}(완료){% endif %}
+                </small>
+            {% endif %}
         </div>
         <div class="card-body">
             <p class="card-text">{{ memo.content|linebreaks }}</p>
